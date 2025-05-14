@@ -1,12 +1,12 @@
 # Unity InputManager (v1.0.0)
 
----
+
 
 ## ✅ 소개
 
 Unity의 New Input System을 기반으로 한 고급 입력 관리 시스템을 제공합니다. 씬(Scene) 및 캔버스(Canvas) 단위의 입력 설정을 지원하며, 플레이 중 실시간 키 재설정(리바인딩) 및 모든 플랫폼 디바이스를 지원합니다.
 
----
+
 
 ## ⭐ 주요 특징
 
@@ -18,7 +18,7 @@ Unity의 New Input System을 기반으로 한 고급 입력 관리 시스템을 
 * **DontDestroyOnLoad** 자동 적용: 씬 전환 시 입력 시스템 유지 보장
 　
 
----
+
 
 ## 📌 설치 방법
 
@@ -33,7 +33,7 @@ https://github.com/joylike2/Unity-Base-Singleton.git
 ```
 　
 
----
+
 
 ## 📌 사용 방법
 
@@ -76,7 +76,7 @@ InputManager.Instance.StartRebinding("Player", "Keyboard", "Move", "Up", "W", (i
 ```
 　
 
----
+
 
 ## 지원 환경
 
@@ -85,7 +85,7 @@ InputManager.Instance.StartRebinding("Player", "Keyboard", "Move", "Up", "W", (i
 
 　
 
----
+
 
 ## 🎉 라이선스
 This package is licensed under The MIT License (MIT)
