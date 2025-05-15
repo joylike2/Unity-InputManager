@@ -1,7 +1,7 @@
-# Unity InputManager (v1.0.0)  
+# Unity InputManager (v1.0.0)
 　
 　
-## ✅ 소개  
+## ✅ 소개
 
 Unity의 New Input System을 기반으로 한 고급 입력 관리 시스템을 제공합니다.
 
@@ -25,9 +25,9 @@ Unity의 New Input System을 기반으로 한 고급 입력 관리 시스템을 
 Unity Package Manager를 통해 쉽게 설치할 수 있습니다.
 
 1. **Package Manager** 열기
-2. **Install package from git URL…** 선택 
+2. **Install package from git URL…** 선택
 3. **`https://github.com/joylike2/Unity-InputManager.git`** 입력 후 설치
-<img src="https://github.com/joylike2/Unity-SaveLoad-FileManager/blob/main/Documentation~/Img_PackageManager1.png?raw=true" width="480px">
+   <img src="https://github.com/joylike2/Unity-SaveLoad-FileManager/blob/main/Documentation~/Img_PackageManager1.png?raw=true" width="480px">
 ```none
 https://github.com/joylike2/Unity-InputManager.git
 ```

@@ -1,0 +1,31 @@
+{
+  "name": "dev.lifelogs.unity-inputmanager",
+  "version": "1.0.0",
+  "displayName": "Unity InputManager",
+  "description": "A Unity package providing advanced input management using the New Input System, supporting per-scene and per-canvas input configuration, runtime key rebinding, and cross-platform device support.",
+  "unity": "2021.3",
+  "author": {
+    "name": "joylike2",
+    "email": "sky@lifelogs.dev",
+    "url": "https://github.com/joylike2"
+  },
+  "keywords": [
+    "unity",
+    "inputsystem",
+    "input",
+    "manager",
+    "inputmanager",
+    "rebinding",
+    "canvas",
+    "scene",
+    "runtime",
+    "cross-platform",
+    "device",
+    "keyboard",
+    "gamepad",
+    "mouse"
+  ],
+  "dependencies": {
+    "com.unity.inputsystem": "1.14.0"
+  }
+}
