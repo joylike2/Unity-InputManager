@@ -46,6 +46,12 @@ https://github.com/joylike2/Unity-InputManager.git
 
 액션맵 추가 및 삭제가 가능 하며, 해당 액션들을 확인 할 수 있습니다.
 
+ 
+<img src="https://github.com/joylike2/Unity-InputManager/blob/main/Documentation~/Img_PackageManager3.png?raw=true" width="420px">
+
+해당 경로에 파일이 생성됩니다. 사용할 키를 추가, 변경을 해서 사용하세요.
+
+
 ---
  
 ### 입력 시스템 사용 할 ActionMap 선택
