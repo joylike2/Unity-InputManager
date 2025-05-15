@@ -101,6 +101,24 @@ InputManager.Instance.StartRebinding(ActionMapName, DeviceType, ActionName, Part
 });
 ```
 
+### Input Device 추가 및 해제 Event 알림
+
+```csharp
+//InputManager 에는 Input Device 추가 및 해제 알림 이벤트액션이 있습니다.
+public Action<bool, string> onDeviceChanged;
+
+//Input Device 추가 및 해제 때 알림을 받을 수 있습니다.
+InputManager.Instance.onDeviceChanged += (bool isConnect, string deviceType) => {
+			onDeviceChanged?.Invoke(isConnect, deviceType);
+		};
+```
+
+### 리바인딩 키 초기화
+
+```csharp
+InputManager.Instance.ResetRebinds();
+```
+
 　
 　
 　
