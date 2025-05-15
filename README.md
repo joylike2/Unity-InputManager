@@ -39,7 +39,7 @@ https://github.com/joylike2/Unity-InputManager.git
 
 ## 📌 사용 방법
 
-### 초기화
+### * 초기화
 <img src="https://github.com/joylike2/Unity-InputManager/blob/main/Documentation~/Img_PackageManager1.png?raw=true" width="480px">
 
 ### 입력 시스템 사용 할 ActionMap 선택
