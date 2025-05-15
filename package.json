@@ -27,5 +27,12 @@
   ],
   "dependencies": {
     "com.unity.inputsystem": "1.14.0"
-  }
+  },
+  "samples": [
+    {
+      "displayName": "Demo",
+      "description": "Sample scene demonstrating usage of the Unity InputManager with runtime key rebinding and per-UI input configuration.",
+      "path": "Samples~"
+    }
+  ]
 }
