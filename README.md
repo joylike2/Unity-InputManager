@@ -27,6 +27,7 @@ Unity Package Manager를 통해 쉽게 설치할 수 있습니다.
 1. **Package Manager** 열기
 2. **Install package from git URL…** 선택
 3. **`https://github.com/joylike2/Unity-InputManager.git`** 입력 후 설치
+   
    <img src="https://github.com/joylike2/Unity-SaveLoad-FileManager/blob/main/Documentation~/Img_PackageManager1.png?raw=true" width="480px">
 ```none
 https://github.com/joylike2/Unity-InputManager.git
