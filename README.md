@@ -113,6 +113,13 @@ InputManager.Instance.StartRebinding(ActionMapName, DeviceType, ActionName, Part
 	3. **우측 Import** 선택 설치
 
 <img src="https://github.com/joylike2/Unity-InputManager/blob/main/Documentation~/Img_PackageManager0.png?raw=true" width="480px">
+
+　
+
+
+
+- 아래 경로에서 샘플을 확인 할 수 있습니다.
+<img src="https://github.com/joylike2/Unity-InputManager/blob/main/Documentation~/Img_PackageManager4.png?raw=true" width="480px">
 　
 
 
