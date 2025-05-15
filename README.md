@@ -130,11 +130,11 @@ InputManager.Instance.ResetRebinds();
 	2. **설치된 FileManager 패키지 메뉴에서 Samples** 선택
 	3. **우측 Import** 선택 설치
 
-<img src="https://github.com/joylike2/Unity-InputManager/blob/main/Documentation~/Img_PackageManager0.png?raw=true" width="480px">
+<img src="https://github.com/joylike2/Unity-InputManager/blob/main/Documentation~/Img_PackageManager0.png?raw=true" width="480px">  
 
 ⚠️ 상단 메뉴 **Tools / InputManager / Settings** 설정 파일 생성을 하셨다면, 꼭!! EventSystem 자동 설정 체크박스를 해제 하세요.
 
-　<img src="https://github.com/joylike2/Unity-InputManager/blob/main/Documentation~/Img_PackageManager5.png?raw=true" width="380px">
+　<img src="https://github.com/joylike2/Unity-InputManager/blob/main/Documentation~/Img_PackageManager5.png?raw=true" width="380px">  
 
 
 
