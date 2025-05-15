@@ -42,7 +42,7 @@ https://github.com/joylike2/Unity-InputManager.git
 ### - 초기화
 상단 메뉴 **Tools / InputManager / Settings** 를 선택 합니다.
 
-<img src="https://github.com/joylike2/Unity-InputManager/blob/main/Documentation~/Img_PackageManager1.png?raw=true" width="420px">
+<img src="https://github.com/joylike2/Unity-InputManager/blob/main/Documentation~/Img_PackageManager1.png?raw=true" width="420px"><img src="https://github.com/joylike2/Unity-InputManager/blob/main/Documentation~/Img_PackageManager2.png?raw=true" width="420px">
 
 ### 입력 시스템 사용 할 ActionMap 선택
 
