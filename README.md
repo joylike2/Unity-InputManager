@@ -119,7 +119,7 @@ InputManager.Instance.StartRebinding(ActionMapName, DeviceType, ActionName, Part
 
 
 - 아래 경로에서 샘플을 확인 할 수 있습니다.  
-　Canvas 가 가진 게임오브젝트들의 Script 를 확인 해주세요.
+Canvas 가 가진 게임오브젝트들의 Script 를 확인 해주세요.
 <img src="https://github.com/joylike2/Unity-InputManager/blob/main/Documentation~/Img_PackageManager4.png?raw=true" width="480px">
 　
 
