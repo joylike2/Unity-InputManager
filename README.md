@@ -131,17 +131,17 @@ InputManager.Instance.ResetRebinds();
 	3. **우측 Import** 선택 설치
 
 <img src="https://github.com/joylike2/Unity-InputManager/blob/main/Documentation~/Img_PackageManager0.png?raw=true" width="480px">  
-  
+　  
 ⚠️ 상단 메뉴 **Tools / InputManager / Settings** 설정 파일 생성을 하셨다면, 꼭!! EventSystem 자동 설정 체크박스를 해제 하세요.
 
 　<img src="https://github.com/joylike2/Unity-InputManager/blob/main/Documentation~/Img_PackageManager5.png?raw=true" width="380px">  
-  
+　  
 
 
 - 아래 경로에서 샘플을 확인 할 수 있습니다.  
 Canvas 가 가진 게임오브젝트들의 Script 를 확인 해주세요.
 <img src="https://github.com/joylike2/Unity-InputManager/blob/main/Documentation~/Img_PackageManager4.png?raw=true" width="480px">
-　
+　  
 
 
 
