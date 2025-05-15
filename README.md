@@ -22,7 +22,7 @@ Unity의 New Input System을 기반으로 한 고급 입력 관리 시스템을 
 　
 ## 📌 설치 방법
 
-Unity Package Manager를 통해 쉽게 설치할 수 있습니다.
+- Unity Package Manager를 통해 쉽게 설치할 수 있습니다.
 
 1. **Package Manager** 열기
 2. **Install package from git URL…** 선택
