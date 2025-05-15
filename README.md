@@ -46,12 +46,13 @@ https://github.com/joylike2/Unity-InputManager.git
 
 액션맵 추가 및 삭제가 가능 하며, 해당 액션들을 확인 할 수 있습니다.
 
+ 
 ### 입력 시스템 사용 할 ActionMap 선택
 
 ```csharp
 using LifeLogs.InputSystem;
 
-//입력 시스템 ActionMap 선택
+//입력 시스템으로 사용할 ActionMap 선택
 void Start() {
     InputManager.Instance.SwitchActionMap("Player");
 }
@@ -60,16 +61,20 @@ void Start() {
 ### 입력 이벤트 사용 예시
 
 ```csharp
+//1. IInputReceiver 추가
 public class PlayerController : MonoBehaviour, IInputReceiver {
 
     private void OnEnable() {
+        //2. Event 등록
         InputManager.Instance.RegisterReceiver(this);
     }
 
     private void OnDisable() {
+        //3. Event 해제
         InputManager.Instance.UnregisterReceiver(this);
     }
 
+    //interface 함수로 Event 콜백을 받습니다.
     public void OnInputPerformed(string actionMap, string actionName, InputAction.CallbackContext context) {
         Debug.Log($"입력: {actionMap} - {actionName} ({context.ReadValueAsObject()})");
     }
@@ -79,8 +84,8 @@ public class PlayerController : MonoBehaviour, IInputReceiver {
 ### 키 리바인딩 예시(키 변경)
 
 ```csharp
-InputManager.Instance.StartRebinding("Player", "Keyboard", "Move", "Up", "W", (isResult, newBinding, readableKey) => {
-    Debug.Log($"리바인딩 완료: {readableKey}");
+InputManager.Instance.StartRebinding(ActionMapName, DeviceType, ActionName, PartKey, compositePartName, (isResult, partKey, changePartKey) => {
+    Debug.Log($"리바인딩 완료: {changePartKey}");
 });
 ```
 　
