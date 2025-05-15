@@ -104,7 +104,7 @@ InputManager.Instance.StartRebinding(ActionMapName, DeviceType, ActionName, Part
 ### 입력 디바이스의 추가 및 해제 알림
 
 ```csharp
-//InputManager 에는 Input Device 추가 및 해제 알림 이벤트액션이 있습니다.
+//InputManager 에는 Input Device 추가 및 해제 알림 이벤트 액션이 있습니다.
 public Action<bool, string> onDeviceChanged;
 
 //Input Device 추가 및 해제 때 알림을 받을 수 있습니다.
