@@ -97,11 +97,11 @@ public class PlayerController : MonoBehaviour, IInputReceiver {
 
 ```csharp
 InputManager.Instance.StartRebinding(ActionMapName, DeviceType, ActionName, PartKey, compositePartName, (isResult, partKey, changePartKey) => {
-    Debug.Log($"리바인딩 완료: {changePartKey}");
+    Debug.Log($"키변경 유무: {isResult}, 리바인딩 할 키: {partKey} 리바인딩 된 키: {changePartKey}");
 });
 ```
 
-### Input Device 추가 및 해제 Event 알림
+### 입력 디바이스의 추가 및 해제 알림
 
 ```csharp
 //InputManager 에는 Input Device 추가 및 해제 알림 이벤트액션이 있습니다.
