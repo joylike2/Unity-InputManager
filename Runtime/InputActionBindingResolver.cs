@@ -47,7 +47,7 @@ namespace LifeLogs.InputSystem {
                         actionBindingsPerDevice[deviceType].parts.Add(partInfo);
                     }
 
-                    // 각 디바이스별로 액션 정보를 최종 추가
+                    //각 디바이스별로 액션 정보를 최종 추가
                     foreach (var kvp in actionBindingsPerDevice) {
                         if (!resultInfo.devices.ContainsKey(kvp.Key)) {
                             resultInfo.devices[kvp.Key] = new DeviceBindingInfo {
@@ -81,6 +81,8 @@ namespace LifeLogs.InputSystem {
                    };
         }
 
+        public static void ResetRebinds(InputActionAsset inputActionAsset) => Init(inputActionAsset);
+        
         public static void ChangeBindingKey(string actionMapName, string deviceType, string actionName, string targetKey, string newReadableKey) {
             List<ActionBindingInfo> actions = _inputActionMapInfo.actionMaps[actionMapName].devices[deviceType].actions;
             foreach (var abInfo in actions) {
@@ -98,22 +100,6 @@ namespace LifeLogs.InputSystem {
 
 
         #region Get
-
-        /// <summary> 중복 키 체크 </summary>
-        public static bool IsDuplicateBinding(string actionMapName, string deviceType, string actionName, string readableKey) {
-            InputActionInfo iaInfo = _inputActionMapInfo.actionMaps[actionMapName];
-            DeviceBindingInfo dbInfo = iaInfo.devices[deviceType];
-            foreach (var abInfo in dbInfo.actions) {
-                if (abInfo.actionName.Equals(actionName)) continue;
-
-                foreach (var bpInfo in abInfo.parts) {
-                    if (!bpInfo.key.Equals(readableKey)) continue;
-                    return true;
-                }
-            }
-
-            return false;
-        }
         
         /// <summary> 액션맵 리스트 반환 </summary>
         public static List<string> GetActionMapNames() => _inputActionMapInfo.GetActionMapNameList();

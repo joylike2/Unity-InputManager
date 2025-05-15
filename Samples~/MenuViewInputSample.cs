@@ -131,22 +131,33 @@ public class MenuViewInputSample : MonoBehaviour {
         infoTextObjA.SetActive(false);
         infoTextObjB.SetActive(true);
         
-        InputManager.Instance.StartRebinding(jumpScript.actionMapName, jumpScript.deviceType, jumpScript.actionName, jumpScript.key, jumpScript.compositePartName, (isResult, partKey, changePartKey) => {
-            Debug.Log($"Jump- isResult: {isResult}, partKey: {partKey}, changePartKey: {changePartKey}");
-            SetInputKeyText();
-            infoTextObjB.SetActive(false);
-            infoTextObjA.SetActive(true);
+        InputManager.Instance.StartRebinding(jumpScript.actionMapName, jumpScript.deviceType, jumpScript.actionName, jumpScript.key, jumpScript.compositePartName, (isComplete, partKey, changePartKey) => {
+            if (isComplete) {
+                SetInputKeyText();
+                infoTextObjB.SetActive(false);
+                infoTextObjA.SetActive(true);    
+            }
+            Debug.Log($"Jump- isResult: {isComplete}, partKey: {partKey}, changePartKey: {changePartKey}");
         });
         
         //복합형일 경우 참고용.
-        // InputManager.Instance.StartRebinding(jumpScript.actionMapName, jumpScript.deviceType, jumpScript.actionName, jumpScript.key, jumpScript.compositePartName, (isResult, partKey, changePartKey) => {
-        //     Debug.Log($"Up- isResult: {isResult}, partKey: {partKey}, changePartKey: {changePartKey}");
-        //     SetInputKeyText();
-        //     infoTextObjB.SetActive(false);
-        //     infoTextObjA.SetActive(true);
+        // InputManager.Instance.StartRebinding(jumpScript.actionMapName, jumpScript.deviceType, jumpScript.actionName, jumpScript.key, jumpScript.compositePartName, (isComplete, partKey, changePartKey) => {
+        //     if (isComplete) {
+        //         SetInputKeyText();
+        //         infoTextObjB.SetActive(false);
+        //         infoTextObjA.SetActive(true);
+        //     }
+        //     Debug.Log($"Up- isResult: {isComplete}, partKey: {partKey}, changePartKey: {changePartKey}");
         // });
     }
 
+    public void ResetRebindButtonAction() {
+        if (infoTextObjB.activeSelf) return;
+        
+        InputManager.Instance.ResetRebinds();
+        SetInputKeyText();
+    }
+    
     #endregion Rebinding View
 
     #region Device Connect Info View

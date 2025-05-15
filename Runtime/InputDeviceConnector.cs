@@ -17,6 +17,7 @@ namespace LifeLogs.InputSystem {
             _inputActionsAsset = inputActionAsset;
             _cachedConnectedDevices = new List<string>();
             UpdateDeviceList();
+            UpdateInputActions();
             UnityEngine.InputSystem.InputSystem.onDeviceChange += OnDeviceChange;
             _isInit = true;
         }
@@ -24,6 +25,21 @@ namespace LifeLogs.InputSystem {
         private static void OnDeviceChange(InputDevice device, InputDeviceChange change) {
             if (change == InputDeviceChange.Added || change == InputDeviceChange.Removed) {
                 UpdateDeviceList();
+                UpdateInputActions();
+                
+                // string temp = $"====    •총개수: [{_cachedConnectedDevices.Count}]    •현재연결된 디바이스: [";
+                // foreach (var ss in _cachedConnectedDevices) {
+                //     temp += ss + ", ";
+                // }
+                // temp = temp.Remove(temp.Length - 2, 2);
+                // temp += "]    •현재연결된 디바이스의 액션맵: [";
+                // foreach (var ss in _cachedConnectedInputActionMapInfo.GetActionMapNameList()) {
+                //     temp += ss + ", ";
+                // }
+                // temp = temp.Remove(temp.Length - 2, 2);
+                // temp += "]    ====";
+                // Debug.Log(temp);
+                
                 if (_isInit) {
                     OnDeviceChanged!.Invoke(change == InputDeviceChange.Added ? true : false, GetDeviceType(device));
                 }
@@ -39,6 +55,9 @@ namespace LifeLogs.InputSystem {
                     _cachedConnectedDevices.Add(typeName);
                 }
             }
+        }
+
+        private static void UpdateInputActions() {
             _cachedConnectedInputActionMapInfo = new InputActionMapInfo();
             foreach (var deviceType in _cachedConnectedDevices) {
                 List<string> actionMapNames = InputActionBindingResolver.GetInputDeviceActionMapNames(deviceType);
@@ -48,20 +67,8 @@ namespace LifeLogs.InputSystem {
                     _cachedConnectedInputActionMapInfo.actionMaps.Add(actionMapName, resultInfo);
                 }
             }
-            
-            string temp = $"====    •총개수: [{_cachedConnectedDevices.Count}]    •현재연결된 디바이스: [";
-            foreach (var ss in _cachedConnectedDevices) {
-                temp += ss + ", ";
-            }
-            temp = temp.Remove(temp.Length - 2, 2);
-            temp += "]    •현재연결된 디바이스의 액션맵: [";
-            foreach (var ss in _cachedConnectedInputActionMapInfo.GetActionMapNameList()) {
-                temp += ss + ", ";
-            }
-            temp = temp.Remove(temp.Length - 2, 2);
-            temp += "]    ====";
-            Debug.Log(temp);
         }
+        
         private static string GetDeviceType(InputDevice device) {
             return device switch {
                        Keyboard => "Keyboard", 
@@ -78,7 +85,12 @@ namespace LifeLogs.InputSystem {
                        _ => "Other"
                    };
         }
-        
+
+        public static void ResetRebinds(InputActionAsset inputActionAsset) {
+            _inputActionsAsset = inputActionAsset;
+            UpdateInputActions();
+        }
+
         public static void ChangeBindingKey(string actionMapName, string deviceType, string actionName, string targetKey, string newReadableKey) {
             List<ActionBindingInfo> actions = _cachedConnectedInputActionMapInfo.actionMaps[actionMapName].devices[deviceType].actions;
             foreach (var abInfo in actions) {

@@ -238,26 +238,11 @@ namespace LifeLogs.InputSystem {
 
             action.Disable();
 
-            // 정확히 바꿀 키(targetKey)를 직접 지정하여 bindingIndex 찾기
+            //정확히 바꿀 키(targetKey)를 직접 지정하여 bindingIndex 찾기
             int bindingIndex = Array.FindIndex(action.bindings.ToArray(), b =>
                 InputControlPath.TryGetDeviceLayout(b.effectivePath) == deviceType &&
                 InputControlPath.ToHumanReadableString(b.effectivePath, InputControlPath.HumanReadableStringOptions.OmitDevice)
                     .Equals(targetKey, StringComparison.OrdinalIgnoreCase));
-
-
-            // 단일 액션이 아니거나(바인딩 수가 1개 이상) 복합키거나 복합키의 일부인 경우 실행되지 않음
-            if (string.IsNullOrEmpty(compositePartName)) {
-                // int bindingIndex = action.bindings.IndexOf(b => b.name == compositePartName && 
-                // InputControlPath.ToHumanReadableString(b.effectivePath).Contains(key, StringComparison.OrdinalIgnoreCase));
-
-                bindingIndex = action.bindings.IndexOf(b => !b.isComposite && !b.isPartOfComposite
-                                                                           && InputControlPath.TryGetDeviceLayout(b.effectivePath) == deviceType);
-            }
-            else {
-                bindingIndex = action.bindings.IndexOf(x => x.isPartOfComposite
-                                                            && x.name.Equals(compositePartName, StringComparison.OrdinalIgnoreCase)
-                                                            && InputControlPath.TryGetDeviceLayout(x.effectivePath) == deviceType);
-            }
 
             action.PerformInteractiveRebinding(bindingIndex)
                 .WithControlsExcluding("Mouse")
@@ -272,7 +257,7 @@ namespace LifeLogs.InputSystem {
                     bool isComplete = false;
                     if (InputDeviceConnector.IsDuplicateBinding(actionMapName, deviceType, actionName, newReadableKey)) {
                         Debug.LogError($"[InputManager] '{newReadableKey}' 키는 '{deviceType}'에서 이미 사용 중입니다.");
-                        action.RemoveBindingOverride(bindingIndex); // 중복 시 원상복구
+                        action.RemoveBindingOverride(bindingIndex); //중복 시 원상복구
                     }
                     else {
                         isComplete = true;
@@ -283,12 +268,24 @@ namespace LifeLogs.InputSystem {
                         Debug.Log($"[InputManager] '{actionName}' [{compositePartName}] 리바인딩 완료: {newBinding}, 눌린 키: {newReadableKey}");
                     }
 
-
-                    // newBinding 이걸 전달할게 아니네. 이전 키가 뭐였는지 검색한번 하고 그거 전달해야겠다.
-                    // 그리고 파씽된 all이랑 현재 데이터들 변경 해줘야겠음.
                     onComplete?.Invoke(isComplete, targetKey, newReadableKey);
                 })
                 .Start();
+        }
+        
+        /// <summary> 변경 된 inputActionsAsset 을 리셋 합니다. </summary>
+        public void ResetRebinds() {
+            string path = Application.persistentDataPath + REBINDS_FILE_NAME;
+
+            if (File.Exists(path)) {
+                File.Delete(path);
+                
+                _inputActionsAsset.RemoveAllBindingOverrides();
+                InputActionBindingResolver.ResetRebinds(_inputActionsAsset);
+                InputDeviceConnector.ResetRebinds(_inputActionsAsset);
+                
+                Debug.Log("[InputManager] 키 바인딩이 초기화되었습니다.");
+            }
         }
 
         #endregion public interface
