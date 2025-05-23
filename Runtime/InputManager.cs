@@ -6,12 +6,7 @@ using UnityEngine.InputSystem;
 using System.Linq;
 
 namespace LifeLogs.InputSystem {
-    /// <summary> 입력 이벤트를 수신할 클래스가 구현해야 할 인터페이스 </summary>
-    public interface IInputReceiver {
-        void OnInputPerformed(string actionMap, string actionName, InputAction.CallbackContext context);
-    }
-
-    public class InputManager : MonoBehaviour {
+    public class InputManager : MonoBehaviour, IInputDeviceConnectorDelegate {
         private static InputManager _instance;
 
         public static InputManager Instance {
@@ -38,15 +33,20 @@ namespace LifeLogs.InputSystem {
         private readonly List<IInputReceiver> _receivers = new List<IInputReceiver>();
         private const string INPUT_ACTIONS_FILE_PATH = "Assets/InputManager/NewInputSystemActions.inputactions";
         private const string REBINDS_FILE_NAME = "/Rebinds.json";
-
-        /// <summary> parm: bool- 연결(true) &amp; 해제(false) 유무, string- 디바이스 </summary>
-        public Action<bool, string> onDeviceChanged;
+        
+        private IDeviceChangedReceiver _deviceChangedReceiver;
+        /// <summary>
+        /// <para> IInputDeviceConnectorDelegate 인터페이스 등록 필수 </para>
+        /// <para> 디바이스 변경 이벤트 수신 델리게이트 등록 </para>
+        /// </summary>
+        public void SetDeviceChangedReceiver(IDeviceChangedReceiver delegateInstance) => _deviceChangedReceiver = delegateInstance;
+        /// <summary> 디바이스 변경 이벤트 수신 델리게이트 해제 </summary>
+        public void RemoveDeviceChangedReceiver() => _deviceChangedReceiver = null;
+        /// <summary> 디바이스 변경 이벤트 수신 델리게이트 등록 유무 </summary>
+        public bool IsDeviceChangedReceiver => _deviceChangedReceiver != null;
 
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
-        private static void CreateInstance() {
-
-            _ = Instance;
-        }
+        private static void CreateInstance() => _ = Instance;
 
         private void Awake() {
             if (_instance != null && _instance != this) {
@@ -63,8 +63,7 @@ namespace LifeLogs.InputSystem {
             LoadRebinds(); //저장된 키설정 로드
 
             InputActionBindingResolver.Init(_inputActionsAsset);
-            InputDeviceConnector.Init(_inputActionsAsset);
-            InputDeviceConnector.OnDeviceChanged += (bool isConnect, string deviceType) => { onDeviceChanged?.Invoke(isConnect, deviceType); };
+            InputDeviceConnector.Init(_inputActionsAsset, this);
         }
 
         #region Initialization
@@ -145,6 +144,15 @@ namespace LifeLogs.InputSystem {
             activeReceiver.OnInputPerformed(_currentActionMap.name, context.action.name, context);
         }
 
+        /// <summary> InputDeviceConnector 변경 정보 전달 </summary>
+        void IInputDeviceConnectorDelegate.OnDeviceChanged(bool isAdd, string deviceType) {
+            if (isAdd) {
+                _deviceChangedReceiver?.OnDeviceConnected(deviceType);
+            }
+            else {
+                _deviceChangedReceiver?.OnDeviceDisconnected(deviceType);
+            }
+        }
         #endregion Input Event Management
 
         #region public interface

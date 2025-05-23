@@ -11,10 +11,12 @@ namespace LifeLogs.InputSystem {
         private static List<string> _cachedConnectedDevices;
         private static InputActionMapInfo _cachedConnectedInputActionMapInfo;
         
-        /// <summary> parm: bool- 연결(true) &amp; 해제(false) 유무, string- 디바이스 </summary>
-        public static Action<bool, string> OnDeviceChanged { get; set; }
-        public static void Init(InputActionAsset inputActionAsset) {
+        private static IInputDeviceConnectorDelegate DeviceChangedDelegate { get; set; }
+        
+        public static void Init(InputActionAsset inputActionAsset, IInputDeviceConnectorDelegate delegateInstance) {
             _inputActionsAsset = inputActionAsset;
+            DeviceChangedDelegate = delegateInstance;
+            
             _cachedConnectedDevices = new List<string>();
             UpdateDeviceList();
             UpdateInputActions();
@@ -41,7 +43,7 @@ namespace LifeLogs.InputSystem {
                 // Debug.Log(temp);
                 
                 if (_isInit) {
-                    OnDeviceChanged!.Invoke(change == InputDeviceChange.Added ? true : false, GetDeviceType(device));
+                    DeviceChangedDelegate.OnDeviceChanged(change == InputDeviceChange.Added ? true : false, GetDeviceType(device));
                 }
             }
         }

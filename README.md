@@ -1,4 +1,4 @@
-# Unity InputManager (v1.0.0)
+# Unity InputManager (v1.1.0)
 　
 　
 ## ✅ 소개
@@ -101,23 +101,45 @@ InputManager.Instance.StartRebinding(ActionMapName, DeviceType, ActionName, Part
 });
 ```
 
-### 입력 디바이스의 추가 및 해제 알림
-
-```csharp
-//InputManager 에는 Input Device 추가 및 해제 알림 이벤트 액션이 있습니다.
-public Action<bool, string> onDeviceChanged;
-
-//Input Device 추가 및 해제 때 알림을 받을 수 있습니다.
-InputManager.Instance.onDeviceChanged += (bool isConnect, string deviceType) => {
-			onDeviceChanged?.Invoke(isConnect, deviceType);
-		};
-```
-
 ### 리바인딩 키 초기화
 
 ```csharp
 InputManager.Instance.ResetRebinds();
 ```
+
+---
+
+### 입력 디바이스의 추가 및 해제 알림(변경v1.1.0)
+
+```csharp
+//1. IDeviceChangedReceiver 추가
+public class PlayerController : MonoBehaviour, IDeviceChangedReceiver {
+
+    private void OnEnable() {
+        //2. Delegate 등록
+        InputManager.Instance.SetDeviceChangedReceiver(this);
+    }
+
+    private void OnDisable() {
+        //3. Delegate 해제
+        InputManager.Instance.RemoveDeviceChangedReceiver();
+    }
+
+    //* interface 함수로 Event 콜백을 받습니다.
+    //디바이스가 추가 되면 알림
+    public void OnDeviceConnected(string deviceType) {
+        Debug.Log($"새로운 디바이스 연결, 디바이스: {deviceType}");
+    }
+    ///디바이스가 삭제 되면 알림
+    public void OnDeviceDisconnected(string deviceType) {
+        Debug.Log($"연결 디바이스 해제, 디바이스: {deviceType}");
+    }
+}
+
+//디바이스 변경 이벤트 수신 델리게이트 등록 유무
+bool isRegisteredToDeviceChange = InputManager.Instance.IsDeviceChangedReceiver();
+```
+
 
 　
 　

@@ -14,7 +14,6 @@ namespace LifeLogs.InputSystem.Editor {
                 var leftover = GameObject.Find("[InputManager]");
                 if (leftover != null) {
                     Object.DestroyImmediate(leftover);
-                    Debug.Log("[PlayModeCleanup] 남아있던 InputManager를 제거했습니다.");
                 }
             }
         }

@@ -4,10 +4,10 @@ using UnityEngine;
 using UnityEngine.UI;
 using LifeLogs.InputSystem;
 
-public class MenuViewInputSample : MonoBehaviour {
+public class MenuViewInputSample : MonoBehaviour, IDeviceChangedReceiver {
     private void Start() {
         SetInputKeyText();
-        InputManager.Instance.onDeviceChanged += OnDeviceChanged;
+        InputManager.Instance.SetDeviceChangedReceiver(this);
     }
 
     #region Action List View
@@ -163,10 +163,16 @@ public class MenuViewInputSample : MonoBehaviour {
     #region Device Connect Info View
 
     [Space] public Text deviceInfoText;
-
-    private void OnDeviceChanged(bool isConnect, string deviceType) {
-        deviceInfoText.text = $"연결유무: {isConnect}, 디바이스: {deviceType}";
+    
+    /// <summary> [IDeviceChangedReceiver] 디바이스가 추가 되면 알림 </summary>
+    public void OnDeviceConnected(string deviceType) {
+        deviceInfoText.text = $"새로운 디바이스 연결, 디바이스: {deviceType}";
     }
 
+    /// <summary> [IDeviceChangedReceiver] 디바이스가 삭제 되면 알림 </summary>
+    public void OnDeviceDisconnected(string deviceType) {
+        deviceInfoText.text = $"연결 디바이스 해제, 디바이스: {deviceType}";
+    }
+    
     #endregion Device Connect Info View
 }
